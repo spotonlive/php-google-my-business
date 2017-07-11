@@ -1,0 +1,21 @@
+{
+  "name": "spotonlive/php-google-my-business",
+  "type": "library",
+  "description": "Google MyBusiness",
+  "keywords": [
+    "google my business"
+  ],
+  "homepage": "https://github.com/BrightLocal/gmb",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Google"
+    }
+  ],
+  "require": {
+    "google/apiclient": ">=2.0"
+  },
+  "autoload": {
+    "classmap": ["."]
+  }
+}
