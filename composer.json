@@ -16,6 +16,8 @@
     "google/apiclient": ">=2.0"
   },
   "autoload": {
-    "classmap": ["."]
+    "files": [
+      "MyBusiness.php"
+    ]
   }
 }
