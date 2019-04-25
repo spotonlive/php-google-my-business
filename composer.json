@@ -7,7 +7,7 @@
     "google my business"
   ],
   "homepage": "https://github.com/spotonlive/php-google-my-business",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Google"
