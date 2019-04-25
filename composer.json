@@ -4,7 +4,7 @@
   "version": "4.4.0",
   "description": "Google MyBusiness",
   "keywords": [
-    "google my business"
+    "google my business", "mybusiness", "gmb"
   ],
   "homepage": "https://github.com/spotonlive/php-google-my-business",
   "license": "Apache-2.0",
@@ -13,6 +13,9 @@
       "name": "Google"
     }
   ],
+  "support": {
+    "docs": "https://developers.google.com/my-business/content/support"
+  },
   "require": {
     "google/apiclient": ">=2.0"
   },
