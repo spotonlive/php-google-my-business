@@ -28,8 +28,6 @@
  * </p>
  *
  * @author Google, Inc.
- * @version v4p4-php-rev20190422-1
- * Downloaded from https://developers.google.com/my-business/samples/
  */
 class Google_Service_MyBusiness extends Google_Service
 {
@@ -52,6 +50,7 @@ class Google_Service_MyBusiness extends Google_Service
   public $categories;
   public $chains;
   public $googleLocations;
+  public $verificationTokens;
   
 
   /**
@@ -1108,6 +1107,20 @@ class Google_Service_MyBusiness extends Google_Service
           )
         )
     );
+    $this->verificationTokens = new Google_Service_MyBusiness_VerificationTokens_Resource(
+        $this,
+        $this->serviceName,
+        'verificationTokens',
+        array(
+          'methods' => array(
+            'generate' => array(
+              'path' => 'v4/verificationTokens:generate',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),
+          )
+        )
+    );
   }
 }
 
@@ -1668,7 +1681,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
    *
    * For more information about valid fields and example usage, see [Work with
    * Location Data Guide](https://developers.google.com/my-business/content
-   * /location-data#filter_results_when_listing_locations).
+   * /location-data#filter_results_when_you_list_locations).
    * @opt_param string pageToken If specified, it fetches the next `page` of
    * locations. The page token is returned by previous calls to `ListLocations`
    * when there were more locations than could fit in the requested page size.
@@ -2610,6 +2623,36 @@ class Google_Service_MyBusiness_GoogleLocations_Resource extends Google_Service_
   }
 }
 
+/**
+ * The "verificationTokens" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $mybusinessService = new Google_Service_MyBusiness(...);
+ *   $verificationTokens = $mybusinessService->verificationTokens;
+ *  </code>
+ */
+class Google_Service_MyBusiness_VerificationTokens_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Generates a token for the provided location data as a vetted partner.
+   *
+   * Throws PERMISSION_DENIED if the caller is not a vetted partner account.
+   * Throws FAILED_PRECONDITION if the caller's VettedStatus is INVALID.
+   * (verificationTokens.generate)
+   *
+   * @param Google_GenerateVerificationTokenRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_MyBusiness_GenerateVerificationTokenResponse
+   */
+  public function generate(Google_Service_MyBusiness_GenerateVerificationTokenRequest $postBody, $optParams = array())
+  {
+    $params = array('postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('generate', array($params), "Google_Service_MyBusiness_GenerateVerificationTokenResponse");
+  }
+}
+
 
 
 
@@ -2713,6 +2756,7 @@ class Google_Service_MyBusiness_AccountState extends Google_Model
   protected $internal_gapi_mappings = array(
   );
   public $status;
+  public $vettedStatus;
 
 
   public function setStatus($status)
@@ -2722,6 +2766,14 @@ class Google_Service_MyBusiness_AccountState extends Google_Model
   public function getStatus()
   {
     return $this->status;
+  }
+  public function setVettedStatus($vettedStatus)
+  {
+    $this->vettedStatus = $vettedStatus;
+  }
+  public function getVettedStatus()
+  {
+    return $this->vettedStatus;
   }
 }
 
@@ -3843,6 +3895,42 @@ class Google_Service_MyBusiness_FollowersMetadata extends Google_Model
 
 class Google_Service_MyBusiness_GenerateAccountNumberRequest extends Google_Model
 {
+}
+
+class Google_Service_MyBusiness_GenerateVerificationTokenRequest extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $locationType = 'Google_Service_MyBusiness_Location';
+  protected $locationDataType = '';
+
+
+  public function setLocation(Google_Service_MyBusiness_Location $location)
+  {
+    $this->location = $location;
+  }
+  public function getLocation()
+  {
+    return $this->location;
+  }
+}
+
+class Google_Service_MyBusiness_GenerateVerificationTokenResponse extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $tokenType = 'Google_Service_MyBusiness_VerificationToken';
+  protected $tokenDataType = '';
+
+
+  public function setToken(Google_Service_MyBusiness_VerificationToken $token)
+  {
+    $this->token = $token;
+  }
+  public function getToken()
+  {
+    return $this->token;
+  }
 }
 
 class Google_Service_MyBusiness_GoogleLocation extends Google_Model
@@ -7180,6 +7268,23 @@ class Google_Service_MyBusiness_VerificationOption extends Google_Model
   }
 }
 
+class Google_Service_MyBusiness_VerificationToken extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $tokenString;
+
+
+  public function setTokenString($tokenString)
+  {
+    $this->tokenString = $tokenString;
+  }
+  public function getTokenString()
+  {
+    return $this->tokenString;
+  }
+}
+
 class Google_Service_MyBusiness_VerifyLocationRequest extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -7194,6 +7299,8 @@ class Google_Service_MyBusiness_VerifyLocationRequest extends Google_Model
   public $method;
   protected $phoneInputType = 'Google_Service_MyBusiness_PhoneInput';
   protected $phoneInputDataType = '';
+  protected $vettedPartnerInputType = 'Google_Service_MyBusiness_VettedPartnerInput';
+  protected $vettedPartnerInputDataType = '';
 
 
   public function setAddressInput(Google_Service_MyBusiness_AddressInput $addressInput)
@@ -7244,6 +7351,14 @@ class Google_Service_MyBusiness_VerifyLocationRequest extends Google_Model
   {
     return $this->phoneInput;
   }
+  public function setVettedPartnerInput(Google_Service_MyBusiness_VettedPartnerInput $vettedPartnerInput)
+  {
+    $this->vettedPartnerInput = $vettedPartnerInput;
+  }
+  public function getVettedPartnerInput()
+  {
+    return $this->vettedPartnerInput;
+  }
 }
 
 class Google_Service_MyBusiness_VerifyLocationResponse extends Google_Model
@@ -7261,5 +7376,23 @@ class Google_Service_MyBusiness_VerifyLocationResponse extends Google_Model
   public function getVerification()
   {
     return $this->verification;
+  }
+}
+
+class Google_Service_MyBusiness_VettedPartnerInput extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $tokenType = 'Google_Service_MyBusiness_VerificationToken';
+  protected $tokenDataType = '';
+
+
+  public function setToken(Google_Service_MyBusiness_VerificationToken $token)
+  {
+    $this->token = $token;
+  }
+  public function getToken()
+  {
+    return $this->token;
   }
 }
