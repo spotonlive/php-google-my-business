@@ -1,7 +1,6 @@
 {
   "name": "spotonlive/php-google-my-business",
   "type": "library",
-  "version": "4.4.0",
   "description": "Google MyBusiness",
   "keywords": [
     "google my business", "mybusiness", "gmb"
