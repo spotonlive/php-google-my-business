@@ -21,3 +21,26 @@ $accounts = $service->accounts->listAccounts()->getAccounts(); // get accounts
 $locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']); // get locations under first account
 $service->accounts_locations_localPosts->create($locations[0]['name'], $post_body); // create post for the location
 ```
+
+### Pulling metrics for location
+$accounts = $service->accounts->listAccounts()->getAccounts();
+$locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']); // get locations for the first account
+$request = new \Google_Service_MyBusiness_ReportLocationInsightsRequest;
+$request->setLocationNames($locations[0]['name']); // set first location to pull data for
+$actions = new \Google_Service_MyBusiness_BasicMetricsRequest;
+$actions->setMetricRequests(['metric' => 'ALL']);
+$time = new \Google_Service_MyBusiness_TimeRange;
+$time->setStartTime('2019-10-02T15:01:23.045123456Z');
+$time->setEndTime('2020-01-31T15:01:23.045123456Z');
+$actions->setTimeRange($time);
+$request->setBasicRequest($actions);
+$insights = $service->accounts_locations->reportInsights($accounts[0]['name'], $request);
+print_r($insights); // see object result structure / insights available
+
+### Other examples
+$media = $service->accounts_locations_media->listAccountsLocationsMedia($locations[0]['name']); // media
+$questions=$service->accounts_locations_questions->listAccountsLocationsQuestions($locations[0]['name'])); // questions
+$notifications=$service->accounts->getNotifications($locations[0]['name'])); // get notifications
+$recommended=$service->accounts->listRecommendGoogleLocations($accounts[0]['name']); // recommended locations
+$admins=$service->accounts_admins->listAccountsAdmins($accounts[0]['name'])); // only for business account, not PERSON account
+$reviews=$service->accounts_locations_reviews->listAccountsLocationsReviews($locations[0]['name'])); // get reviews
