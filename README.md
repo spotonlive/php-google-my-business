@@ -20,7 +20,6 @@ $post_body->setMedia($media);
 $accounts = $service->accounts->listAccounts()->getAccounts(); // get accounts
 $locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']); // get locations under first account
 $service->accounts_locations_localPosts->create($locations[0]['name'], $post_body); // create post for the location
-```
 
 ### Pulling metrics for location
 $accounts = $service->accounts->listAccounts()->getAccounts();
@@ -54,3 +53,4 @@ $notifications=$service->accounts->getNotifications($locations[0]['name'])); // 
 $recommended=$service->accounts->listRecommendGoogleLocations($accounts[0]['name']); // recommended locations
 $admins=$service->accounts_admins->listAccountsAdmins($accounts[0]['name'])); // only for business account, not PERSON account
 $reviews=$service->accounts_locations_reviews->listAccountsLocationsReviews($locations[0]['name'])); // get reviews
+```
