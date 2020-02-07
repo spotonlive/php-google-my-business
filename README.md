@@ -4,7 +4,6 @@ Google MyBusiness
 ## Examples
 
 ### Creating a new post
-
 ```
 $post_body = new \Google_Service_MyBusiness_LocalPost;
 $post_body->setLanguageCode('en');
@@ -20,8 +19,10 @@ $post_body->setMedia($media);
 $accounts = $service->accounts->listAccounts()->getAccounts(); // get accounts
 $locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']); // get locations under first account
 $service->accounts_locations_localPosts->create($locations[0]['name'], $post_body); // create post for the location
+```
 
 ### Pulling metrics for location
+```
 $accounts = $service->accounts->listAccounts()->getAccounts();
 $locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']); // get locations for the first account
 $request = new \Google_Service_MyBusiness_ReportLocationInsightsRequest;
@@ -35,8 +36,10 @@ $actions->setTimeRange($time);
 $request->setBasicRequest($actions);
 $insights = $service->accounts_locations->reportInsights($accounts[0]['name'], $request);
 print_r($insights); // see object result structure / insights available
+```
 
 ### Driving metrics for a location
+```
 $locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']);
 $request = new \Google_Service_MyBusiness_ReportLocationInsightsRequest;
 $request->setLocationNames($locations[0]['name']);
@@ -45,8 +48,10 @@ $driving->setNumDays(90);
 $request->setDrivingDirectionsRequest($driving);
 $insights = $service->accounts_locations->reportInsights($accounts[0]['name'], $request);
 print_r($insights);
+```
 
 ### Other examples
+```
 $media = $service->accounts_locations_media->listAccountsLocationsMedia($locations[0]['name']); // media
 $questions=$service->accounts_locations_questions->listAccountsLocationsQuestions($locations[0]['name'])); // questions
 $notifications=$service->accounts->getNotifications($locations[0]['name'])); // get notifications
