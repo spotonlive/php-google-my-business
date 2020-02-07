@@ -37,6 +37,16 @@ $request->setBasicRequest($actions);
 $insights = $service->accounts_locations->reportInsights($accounts[0]['name'], $request);
 print_r($insights); // see object result structure / insights available
 
+### Driving metrics for a location
+$locations = $service->accounts_locations->listAccountsLocations($accounts[0]['name']);
+$request = new \Google_Service_MyBusiness_ReportLocationInsightsRequest;
+$request->setLocationNames($locations[0]['name']);
+$driving = new \Google_Service_MyBusiness_DrivingDirectionMetricsRequest;
+$driving->setNumDays(90);
+$request->setDrivingDirectionsRequest($driving);
+$insights = $service->accounts_locations->reportInsights($accounts[0]['name'], $request);
+print_r($insights);
+
 ### Other examples
 $media = $service->accounts_locations_media->listAccountsLocationsMedia($locations[0]['name']); // media
 $questions=$service->accounts_locations_questions->listAccountsLocationsQuestions($locations[0]['name'])); // questions
